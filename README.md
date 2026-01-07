@@ -1,3 +1,3 @@
-# technion_ninja_seq
+# NinjaSeq
 
-repository containing scripts for ninja-seq analysis
+repository containing scripts to reproduce NinjaSeq analysis

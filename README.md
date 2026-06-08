@@ -6,7 +6,7 @@ Scripts and notebooks to reproduce the **NinjaSeq** analysis: an Oxford Nanopore
 random-access experiments).
 
 The repository ships only the analysis code and the reference designs; raw
-POD5 / BAM / FASTQ files are expected to live alongside the repo in a
+POD5 / BAM / FASTQ files are expected to be alongside the repo in a
 sibling `data/` (and `raw_data/`) folder.
 
 ## Repository layout

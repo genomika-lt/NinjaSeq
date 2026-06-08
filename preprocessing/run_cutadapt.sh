@@ -19,7 +19,7 @@ for ubam in "${ubams[@]}"; do
 	--error-rate 0.25 \
 	--revcomp \
 	--discard-untrimmed \
-	--minimum-length 150 \
+	--minimum-length 190 \
 	--output "$out/${name,,}_trimmed_ont.fastq.gz" \
 	- > "$out/${name,,}_cutadapt.log"
 

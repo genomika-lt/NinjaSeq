@@ -17,10 +17,11 @@ NinjaSeq/
 │   ├── run_dorado_basecaller.sh
 │   ├── run_cutadapt.sh
 │   └── run_minimap2.sh
-├── references/                   # Reference FASTAs for the three pool designs
-│   ├── f1_data_after_indices_two_files.fasta   # F1 pool   (~110 000 sequences)
-│   ├── p2_design.fasta                         # P2 pool   (~1 000 sequences)
-│   └── data_genomika_constrained_indexed.fasta # C1 pool   (~1 644 sequences)
+├── references/                   # Reference FASTAs for the pool designs
+│   ├── f1_data_after_indices_two_files.fasta   # F1 pool         (~110 000 sequences)
+│   ├── p2_design.fasta                         # P2 pool         (~1 000 sequences)
+│   ├── data_genomika_constrained_indexed.fasta # C1 pool         (~1 644 sequences)
+│   └── combined_p2_c1_d1_ref_wo_primers.fasta  # P2+C1+D1 merged (~4 414 sequences)
 └── notebooks/                    # Downstream analysis (Python + DuckDB)
     ├── 01_qc_stats.ipynb         # Raw read QC (length, qscore, channel, time)
     ├── 02_read_re_stats.ipynb    # Restriction-site (GGATG / CATCC) profiling
@@ -52,6 +53,8 @@ Sample-name conventions used throughout:
 | `nj_p2`   | P2   | `CAMELLIA_008`   | `p2_design.fasta`                         |
 | `hp_c1`   | C1   | `CAMELLIA_11`    | `data_genomika_constrained_indexed.fasta` |
 | `nj_c1`   | C1   | `CAMELLIA_17`    | `data_genomika_constrained_indexed.fasta` |
+| `hp` (rand-access) | P2+C1+D1 | `CAMELLIA_21` | `combined_p2_c1_d1_ref_wo_primers.fasta` |
+| `nj` (rand-access) | P2+C1+D1 | `CAMELLIA_22` | `combined_p2_c1_d1_ref_wo_primers.fasta` |
 
 The `hp_` / `nj_` prefixes denote the two library-preparation protocols being
 compared (HP vs NinjaSeq).
@@ -118,7 +121,7 @@ materialised as Parquet under `../results/` and queried with DuckDB.
   / start-time / channel tags, and emits `qc_stats_{f1,p2,c1}.parquet` for
   downstream plots.
 - [notebooks/02_read_re_stats.ipynb](notebooks/02_read_re_stats.ipynb) — locates
-  the `GGATG` / `CATCC` recognition motif (BseGI Type IIS site) in each
+  the `GGATG` / `CATCC` recognition motif (BseGI site) in each
   reference, then annotates mapped reads with whether they terminate at an
   RS site, are truncated, etc.
 - [notebooks/03_read_stats.ipynb](notebooks/03_read_stats.ipynb) — per-read
@@ -127,8 +130,9 @@ materialised as Parquet under `../results/` and queried with DuckDB.
 - [notebooks/04_rand_access.ipynb](notebooks/04_rand_access.ipynb) —
   random-access size-selection experiment (samples `CAMELLIA_21` /
   `CAMELLIA_22`); compares unfiltered vs. length-trimmed read-length
-  distributions against a combined P2+C1+D1 reference
-  (`combined_p2_c1_d1_ref_wo_primers.fasta`).
+  distributions against the combined P2+C1+D1 reference
+  [references/combined_p2_c1_d1_ref_wo_primers.fasta](references/combined_p2_c1_d1_ref_wo_primers.fasta)
+  (4 414 sequences with `p2_` / `c1_` / `d1_` prefixed IDs, primers removed).
 - [notebooks/04_rrs_screen.ipynb](notebooks/04_rrs_screen.ipynb) — scans
   mapped C1 reads for in-read RRS motifs and projects them onto reference
   coordinates to screen candidate truncation sites.

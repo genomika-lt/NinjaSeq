@@ -5,6 +5,8 @@ Scripts and notebooks to reproduce the **NinjaSeq** analysis: an Oxford Nanopore
 (library QC, restriction-site profiling, read-level statistics, and
 random-access experiments).
 
+![NinjaSeq workflow figure](misc/ninjaseq_workflow.png)
+
 The repository ships only the analysis code and the reference designs; raw
 POD5 / BAM / FASTQ files are expected to be alongside the repo in a
 sibling `data/` (and `raw_data/`) folder.
